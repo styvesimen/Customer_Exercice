@@ -113,7 +113,7 @@
 				
 				<table >	
 							<tr>
-								<td style="width: 200px; height: 25px">ID</td>
+								<td style="width: 75px; height: 25px">ID</td>
 							
 								<td><input type="text" id="id1" style="width: 300px; height: 25px" disabled/></td>
 							</tr>

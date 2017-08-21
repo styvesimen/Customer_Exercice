@@ -65,6 +65,9 @@ public class CustomerServlet extends HttpServlet {
 			else if(action.equalsIgnoreCase("update")){
 				customerDao.updateCustomer(c);
 			}
+			else if(action.equalsIgnoreCase("read")){
+				customerDao.readCustomer(c.getCustomer_id());
+			}
 			else if(action.equalsIgnoreCase("delete")){
 				customerDao.deleteCustomer(c.getCustomer_id());
 			}

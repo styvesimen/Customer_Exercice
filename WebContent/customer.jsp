@@ -22,51 +22,17 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	</head>
 	<body>
-		<h1 id="head">Customer Information</h1>
+		<h1 id="head">Customer Info</h1>
 		<ul id="navigation">
 			
-			<li><span class="inactive"><a href="index.jsp">Customer</a></span></li>
+			<li><span class="inactive"><a href="index.jsp">Information</a></span></li>
 		</ul>
 		
 			<div id="content" class="container_16 clearfix">
 				<div class="grid_6">
 				<div class="box">
 
-					<table>	
-							
-							<tr>
-								<td><label>ID</label></td>
-							</tr>
-							<tr>
-								<td><input type="text" id="id" disabled/></td>
-							</tr>
-							<tr>
-								<td><label>First Name</label></td>
-							</tr>
-							<tr>
-								<td><input type="text" id="firstname"/></td>
-							</tr>
-							<tr>
-								<td><label>Name</label></td>
-							</tr>
-							<tr>
-								<td><input type="text" id="name"/></td>
-							</tr>
-							<tr>
-								<td><label>Date of Birth</label></td>
-							</tr>
-							<tr>
-								<td><input type="text" id="dob"/></td>
-							</tr>
-							<tr>
-								<td><label>Email</label></td>
-							</tr>
-							<tr>
-								<td><input type="text" id="email"/></td>
-							</tr>
-							
-							
-					</table>
+		
 
 				</div>
 				</div>
@@ -85,7 +51,7 @@
 							<%for(Customer c: listCustomer){ %>
 								<tr id="<%=c.getCustomer_id() %>">
 									<td style="display:none;"><%=c.getCustomer_id() %></td>
-									<td><a href='customer.jsp?id=<%=c.getCustomer_id() %>'><%=c.getFirstName()%></a></td>
+									<td><a href="customer.jsp" class='link'><%=c.getFirstName()%></a></td>
 									<td><%=c.getName()%></td>
 									<td><%=c.getDob()%></td>
 									<td><%=c.getEmail()%></td>
@@ -100,6 +66,47 @@
 					</table>
 				</div>
 				
+				
+				<div class="grid_12">
+						<p align="right"><button id="create">Create New Customer</button></p>
+				</div> <!--end div button-->
+				
+				
+				<table>	
+							<tr>
+								<td><label>ID</label></td>
+							</tr>
+							<tr>
+								<td><input type="text" id="id1" disabled/></td>
+							</tr>
+							<tr>
+								<td><label>First Name</label></td>
+							</tr>
+							<tr>
+								<td><input type="text" id="firstname1"/></td>
+							</tr>
+							<tr>
+								<td><label>Name</label></td>
+							</tr>
+							<tr>
+								<td><input type="text" id="name1"/></td>
+							</tr>
+							<tr>
+								<td><label>Date of Birth</label></td>
+							</tr>
+							<tr>
+								<td><input type="text" id="dob1"/></td>
+							</tr>
+							<tr>
+								<td><label>Email</label></td>
+							</tr>
+							<tr>
+								<td><input type="text" id="email1"/></td>
+							</tr>
+				</table>
+				
+				
+				
 				</div>
 			</div>
 		<div id="foot">
@@ -107,5 +114,41 @@
 				
 		</div>
 	</body>
-    
+    <script>
+        $(document).ready(function() {
+            var action = "create";
+
+           
+            
+            //When user click on the link 
+            $(".link").click(function(){
+                var row = $(this).parent().parent().attr('id');
+                $("#id1").val($("#"+row).find('td:eq(0)').text());
+                $("#firstname1").val($("#"+row).find('td:eq(1)').text());
+                $("#name1").val($("#"+row).find('td:eq(2)').text());
+                $("#dob1").val($("#"+row).find('td:eq(3)').text());
+                $("#email1").val($("#"+row).find('td:eq(4)').text());
+                
+                action = "read";
+            });
+
+          
+
+            //This function will send data to page CustomerHandler to process data, depends on action = update, add or delete
+            function customerServlet(id, firstname, name, dob, email, action)
+            {
+                $.ajax({
+					  type: "POST",
+					  url: "CustomerServlet",
+					  data: "customer_id=" + id + "&firstname=" + firstname +  "&name=" + name +  "&dob=" + dob + "&email=" + email + "&action=" + action,
+					  success: function(result){
+						  //alert('the operation '+action+' has been successful');
+						  //window.location.reload();
+					  },
+					  dataType: "text"
+					});
+            }
+			
+        });
+    </script>
 </html>

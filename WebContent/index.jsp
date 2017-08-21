@@ -21,6 +21,7 @@
 		<link rel="stylesheet" href="css/colour.css" type="text/css" media="screen" charset="utf-8" />
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	</head>
+	
 	<body>
 		<h1 id="head">Customer Management</h1>
 		<ul id="navigation">
@@ -90,7 +91,7 @@
 							<%for(Customer c: listCustomer){ %>
 								<tr id="<%=c.getCustomer_id() %>">
 									<td style="display:none;"><%=c.getCustomer_id() %></td>
-									<td><a href='customer.jsp?id=<%=c.getCustomer_id() %>'><%=c.getFirstName()%></td>
+									<td><a href='#' class='link'><%=c.getFirstName()%></a></td>
 									<td><%=c.getName()%></td>
 									<td><%=c.getDob()%></td>
 									<td><%=c.getEmail()%></td>
@@ -104,11 +105,45 @@
 						</tbody>
 					</table>
 				</div>
+				
 				<div class="grid_12">
 						<p align="right"><button id="create">Create New Customer</button></p>
 				</div> <!--end div button-->
+				
+				
+				<table >	
+							<tr>
+								<td style="width: 200px; height: 25px">ID</td>
+							
+								<td><input type="text" id="id1" style="width: 300px; height: 25px" disabled/></td>
+							</tr>
+							<tr>
+								<td >First Name</td>
+							
+								<td><input type="text" id="firstname1" style="width: 300px; height: 25px" disabled/></td>
+							</tr>
+							<tr>
+								<td>Name</td>
+							
+								<td><input type="text" id="name1" style="width: 300px; height: 25px" disabled/></td>
+							</tr>
+							<tr>
+								<td>Date of Birth</td>
+							
+								<td><input type="text" id="dob1" style="width: 300px; height: 25px" disabled/></td>
+							</tr>
+							<tr>
+								<td>Email</td>
+							
+								<td><input type="text" id="email1" style="width: 300px; height: 25px" disabled/></td>
+							</tr>
+				</table>
+				
+				
 				</div>
+				
 			</div>
+			
 		<div id="foot">
 					<a href="#">Contact Me</a>
 				
@@ -128,6 +163,18 @@
                 $("#email").val($("#"+row).find('td:eq(4)').text());
                 
                 action = "update";
+            });
+            
+            //When user click on Edit button
+            $(".link").click(function(){
+                var row = $(this).parent().parent().attr('id');
+                $("#id1").val($("#"+row).find('td:eq(0)').text());
+                $("#firstname1").val($("#"+row).find('td:eq(1)').text());
+                $("#name1").val($("#"+row).find('td:eq(2)').text());
+                $("#dob1").val($("#"+row).find('td:eq(3)').text());
+                $("#email1").val($("#"+row).find('td:eq(4)').text());
+                
+                action = "read";
             });
 
             //When user click on Create button

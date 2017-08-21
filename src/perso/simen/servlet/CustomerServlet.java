@@ -44,8 +44,8 @@ public class CustomerServlet extends HttpServlet {
 		
 		try{
 			
-			HttpSession session = request.getSession();
-			Customer customer = (Customer) session.getAttribute("customer");
+//			HttpSession session = request.getSession();
+//			Customer customer = (Customer) session.getAttribute("customer");
 			
 			out = response.getWriter();
 			CustomerDao customerDao = new CustomerImpl();
@@ -58,21 +58,15 @@ public class CustomerServlet extends HttpServlet {
 			c.setDob(request.getParameter("dob"));
 			c.setEmail(request.getParameter("email"));
 			
-			
+			System.out.print("action :"+action);
 			if(action.equalsIgnoreCase("create")){
-				customerDao.createCustomer(customer);
-			}
-			else if(action.equalsIgnoreCase("read")){
-				customerDao.readCustomer(customer.getCustomer_id());
+				customerDao.createCustomer(c);
 			}
 			else if(action.equalsIgnoreCase("update")){
-				customerDao.updateCustomer(customer);
+				customerDao.updateCustomer(c);
 			}
 			else if(action.equalsIgnoreCase("delete")){
-				customerDao.deleteCustomer(customer.getCustomer_id());
-			}
-			else if(action.equalsIgnoreCase("getAll")){
-				customerDao.listAllCustomer();
+				customerDao.deleteCustomer(c.getCustomer_id());
 			}
 			
 		}catch(Exception ex){

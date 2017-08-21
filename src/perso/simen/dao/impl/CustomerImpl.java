@@ -55,7 +55,7 @@ public class CustomerImpl implements CustomerDao{
 			
 			ResultSet rs = ps.executeQuery();
 			
-			if(rs.next()){
+			while(rs.next()){
 				customer = new Customer();
 				customer.setCustomer_id(customer_id);
 				customer.setFirstName(rs.getString("firstname"));
@@ -86,6 +86,7 @@ public class CustomerImpl implements CustomerDao{
 	@Override
 	public int updateCustomer(Customer customer) {
 		Connection connection=null;
+		
 		try{
 			PreparedStatement ps=null;
 			connection = DBConnector.getInstance().getConnection();		
@@ -161,7 +162,7 @@ public class CustomerImpl implements CustomerDao{
 			ps = connection.prepareStatement("SELECT * FROM Customer");
 			ResultSet rs = ps.executeQuery();
 			
-			if(rs.next()){
+			while(rs.next()){
 				Customer customer = new Customer();
 				customer.setCustomer_id(rs.getInt("customer_id"));
 				customer.setFirstName(rs.getString("firstname"));

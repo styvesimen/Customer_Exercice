@@ -90,7 +90,7 @@
 							<%for(Customer c: listCustomer){ %>
 								<tr id="<%=c.getCustomer_id() %>">
 									<td style="display:none;"><%=c.getCustomer_id() %></td>
-									<td><%=c.getFirstName()%></td>
+									<td><a href='customer.jsp?id=<%=c.getCustomer_id() %>'><%=c.getFirstName()%></td>
 									<td><%=c.getName()%></td>
 									<td><%=c.getDob()%></td>
 									<td><%=c.getEmail()%></td>
@@ -189,8 +189,8 @@
 					  url: "CustomerServlet",
 					  data: "customer_id=" + id + "&firstname=" + firstname +  "&name=" + name +  "&dob=" + dob + "&email=" + email + "&action=" + action,
 					  success: function(result){
-						  //alert(result);
-						  //window.location.reload();
+						  alert('the operation '+action+' has been successful');
+						  window.location.reload();
 					  },
 					  dataType: "text"
 					});
